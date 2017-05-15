@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/webhooks', function() {
+    $endpoint = Request::url();
+    $inputs = json_decode(file_get_contents('php://input'), true);
+    if ( isset( $inputs['type'] ) && $inputs['type'] == 'verify' ) {
+        return hash ('sha512', $endpoint);
+    }
+});
