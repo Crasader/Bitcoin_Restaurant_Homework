@@ -11,7 +11,7 @@ namespace App;
 use Illuminate\Support\Facades\Facade;
 use Mockery\Exception;
 
-class Exchange
+class Helper
 {
     public static function getBTCToUAH()
     {
@@ -40,5 +40,20 @@ class Exchange
         $client_usd_uah = $usd_uah * (1 - $usd_uah_fee);
         $client_btc_uah = $client_btc_usd * $client_usd_uah;
         return $client_btc_uah;
+    }
+
+    public static function getBTCAddress() {
+        $FstxApi = \App::make('FstxApi');
+        $res = $FstxApi->query_private('address/get/new', ['is_autoexchange' => 1]);
+        if (
+            !isset($res['code'])
+            || $res['code'] != 0
+            || !isset($res['data']['address'])
+            || $res['data']['address'] == ''
+        )
+        {
+            return false;
+        }
+        return $res['data']['address'];
     }
 }

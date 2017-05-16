@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         $data = ['error' => false];
         try {
-            $data['btc_in_uah'] = \Exchange::getBTCToUAH();
+            $data['btc_in_uah'] = \Helper::getBTCToUAH();
         } catch (\Exception $e) {
             $data['error'] = true;
         }

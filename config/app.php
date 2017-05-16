@@ -227,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Exchange' => \App\Exchange::class,
+        'Helper' => \App\Helper::class,
 
         // Extras
         'Form' => Collective\Html\FormFacade::class,
