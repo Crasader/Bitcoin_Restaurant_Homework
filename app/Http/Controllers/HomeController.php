@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\FstxApi;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function rate()
+    {
+        $data = ['error' => false];
+        try {
+            $data['btc_in_uah'] = \Exchange::getBTCToUAH();
+        } catch (\Exception $e) {
+            $data['error'] = true;
+        }
+        return view('rate', $data);
     }
 }

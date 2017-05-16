@@ -25,6 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/orders', 'HomeController@index')->name('orders');
-Route::get('/rate', 'HomeController@index')->name('x-rate');
+Route::get('/rate', 'HomeController@rate')->name('x-rate');
 Route::get('/add_order', 'HomeController@index')->name('add_order');
 Route::get('/history', 'HomeController@index')->name('history');
