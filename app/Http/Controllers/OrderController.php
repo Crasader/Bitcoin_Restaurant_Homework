@@ -29,7 +29,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order.create');
+        $id = \DB::table('orders')->max('id');
+        return view('order.create', [
+            'order_number' => ++$id,
+        ]);
     }
 
     /**

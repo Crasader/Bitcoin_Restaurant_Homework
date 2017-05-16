@@ -12,7 +12,7 @@
         <div class="form-group {{ $errors->has('order_number') ? 'has-error' : ''}}">
             {!! Form::label('order_number', 'Order Number', ['class' => 'col-sm-3 control-label']) !!}
             <div class="col-sm-6">
-                {!! Form::text('order_number', null, ['class' => 'form-control']) !!}
+                {!! Form::text('order_number', $order_number, ['class' => 'form-control']) !!}
                 {!! $errors->first('order_number', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
