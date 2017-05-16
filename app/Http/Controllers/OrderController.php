@@ -19,7 +19,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index');
+        $orders = Order::opened()->paginate();
+        return view('order.index', ['orders' => $orders]);
     }
 
     /**

@@ -14,6 +14,14 @@ class Order extends Model
 
     protected $guarded = [];
 
+    protected $statuses = [
+        self::STATUS_NEW => ['name' => 'New', 'class' => 'btn btn-primary'],
+        self::STATUS_UNCONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_UNCONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
+        self::STATUS_CONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_CONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
+    ];
+
     public function __call($method, $parameters)
     {
         $callback = function($parameters) {
@@ -44,5 +52,24 @@ class Order extends Model
             $value = round($value, 8) * \Config::get('exchange.factor');
         }
         parent::__set($key, $value);
+    }
+
+    public function getStatusName() {
+        return $this->statuses[$this->status]['name'];
+    }
+
+    public function getStatusClass() {
+        return $this->statuses[$this->status]['class'];
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOpened($query)
+    {
+        return $query->where('status', '<',5);
     }
 }
