@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_number', 40)->unique();
             $table->integer('status');
             $table->float('amount', 8, 2);
-            $table->string('description', 200);
+            $table->string('description', 200)->nullable();
             $table->timestamps();
         });
     }
