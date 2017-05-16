@@ -30,12 +30,13 @@ class HomeController extends Controller
 
     public function rate()
     {
-        $data = ['error' => false];
-        try {
-            $data['btc_in_uah'] = \Helper::getBTCToUAH();
-        } catch (\Exception $e) {
-            $data['error'] = true;
+        $btc_in_uah = \Helper::getBTCToUAH();
+        if ($btc_in_uah) {
+            $data = ['btc_in_uah' => $btc_in_uah];
+            return view('rate', $data);
+        } else {
+            $data = ['message' => 'Can not get exchange rate. Exchange service is not working. Try again later.'];
+            return view('error', $data);
         }
-        return view('rate', $data);
     }
 }
