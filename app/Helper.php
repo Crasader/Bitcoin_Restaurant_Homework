@@ -49,7 +49,7 @@ class Helper
     {
         $label = 'Label';
         $message = 'Message';
-        $QRSrting = sprintf('bitcoin:%s?amount=%f&label=%s&message=%s', $address, $amount, $label, $message);
+        $QRSrting = sprintf('bitcoin:%s?amount=%s&label=%s&message=%s', $address, $amount, $label, $message);
         return 'data:image/png;base64,' . \DNS2D::getBarcodePNG($QRSrting, "QRCODE");
     }
 

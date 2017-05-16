@@ -60,10 +60,11 @@ class OrderController extends Controller
                 'status' => Order::STATUS_NEW,
                 'description' => $inputData['description'],
             ]);
-            
-            $data['order'] = $order;
-            $data['QRCode'] = \Helper::getQRCode($address, $btcAmount);
-            $data['btc_amount'] = $btcAmount;
+
+            $data = [
+                'order' => $order,
+                'QRCode' => \Helper::getQRCode($address, $order->amount_btc),
+            ];
             return view('order.qr', $data);
         } else {
             return view('error', ['message' => 'Try again later.']);
