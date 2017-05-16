@@ -9,7 +9,7 @@
 
         {!! Form::open(['route' => 'orders.store', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : ''}}">
+        <div class="form-group {{ $errors->has('order_number') ? 'has-error' : ''}}">
             {!! Form::label('order_number', 'Order Number', ['class' => 'col-sm-3 control-label']) !!}
             <div class="col-sm-6">
                 {!! Form::text('order_number', null, ['class' => 'form-control']) !!}
@@ -29,7 +29,7 @@
         <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
             {!! Form::label('description', 'Description', ['class' => 'col-sm-3 control-label']) !!}
             <div class="col-sm-6">
-                {!! Form::number('description', null, ['class' => 'form-control']) !!}
+                {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 3]) !!}
                 {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
