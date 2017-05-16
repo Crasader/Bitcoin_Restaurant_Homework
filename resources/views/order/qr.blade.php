@@ -7,7 +7,7 @@
             <div class="form-group">
                 {!! Form::label('order_number', 'Order Number', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('order_number', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('order_number', $order->order_number, ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="form-group">
@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                         <div class="input-group-addon">₴</div>
-                        {!! Form::text('amount_uah', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('amount_uah', $order->amount, ['class' => 'form-control']) !!}
                         <div class="input-group-addon">UAH</div>
                     </div>
                 </div>
@@ -31,9 +31,9 @@
                 </div>
             </div>
             <div class="form-group">
-                {!! Form::label('order_number', 'Address', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('address', 'Address', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('order_number', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('address', $order->address, ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="row">
