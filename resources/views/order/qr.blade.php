@@ -25,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-btc"></i></div>
-                        {!! Form::text('amount_btc', 0.11111, ['class' => 'form-control']) !!}
+                        {!! Form::text('amount_btc', $btc_amount, ['class' => 'form-control']) !!}
                         <div class="input-group-addon">BTC</div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="col-xs-4 col-md-4"></div>
                 <div class="col-xs-3 col-md-3">
                     <div class="thumbnail">
-                        {!! HTML::image('sss', 'QR Code') !!}
+                        <img src="{{$QRCode}}" alt="QR Code" width="100%">
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4"></div>

@@ -57,8 +57,16 @@ class OrderController extends Controller
             'status' => Order::STATUS_NEW,
             'description' => $inputData['description'],
         ]);
-
-        return view('order.qr', ['order' => $order]);
+        $btcAmount = 0.11111;
+        $label = 'lebel';
+        $message = 'message';
+        $qrSrting = sprintf('bitcoin:%s?amount=%f&label=%s&message=%s', $address, $btcAmount, $label, $message);
+        $data = [
+            'order' => $order,
+            'QRCode' => 'data:image/png;base64,'.\DNS2D::getBarcodePNG($qrSrting, "QRCODE"),
+            'btc_amount' => $btcAmount,
+        ];
+        return view('order.qr', $data);
     }
 
     /**
