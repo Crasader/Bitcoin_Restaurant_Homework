@@ -25,9 +25,11 @@
                         <button type="button" class="{{$order->getStatusClass()}}">{{$order->getStatusName()}}</button>
                     </td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        <button type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        </button>
+                        <a href="{{ route('orders.show', ['order' => $order->id]) }}">
+                            <button type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            </button>
+                        </a>
                     </td>
                 </tr>
             @endforeach
