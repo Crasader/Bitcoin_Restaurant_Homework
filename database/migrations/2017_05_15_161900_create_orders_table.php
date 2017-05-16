@@ -18,7 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('address', 35);
             $table->string('order_number', 40)->unique();
             $table->integer('status');
-            $table->float('amount', 8, 2);
+            $table->bigInteger('amount_uah', false, true);
+            $table->bigInteger('amount_btc', false, true);
             $table->string('description', 200)->nullable();
             $table->timestamps();
         });

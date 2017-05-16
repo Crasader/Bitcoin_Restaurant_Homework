@@ -49,24 +49,25 @@ class OrderController extends Controller
         $inputData = $request->all();
 
         $address = \Helper::getBTCAddress();
+        $btcAmount = \Helper::getUAHToBTC($inputData['amount']);
 
-        $order = Order::create([
-            'address' => $address,
-            'order_number' => $inputData['order_number'],
-            'amount' => $inputData['amount'],
-            'status' => Order::STATUS_NEW,
-            'description' => $inputData['description'],
-        ]);
-        $btcAmount = 0.11111;
-        $label = 'lebel';
-        $message = 'message';
-        $qrSrting = sprintf('bitcoin:%s?amount=%f&label=%s&message=%s', $address, $btcAmount, $label, $message);
-        $data = [
-            'order' => $order,
-            'QRCode' => 'data:image/png;base64,'.\DNS2D::getBarcodePNG($qrSrting, "QRCODE"),
-            'btc_amount' => $btcAmount,
-        ];
-        return view('order.qr', $data);
+        if ($address && $btcAmount) {
+            $order = Order::create([
+                'address' => $address,
+                'order_number' => $inputData['order_number'],
+                'amount_uah' => $inputData['amount'],
+                'amount_btc' => $btcAmount,
+                'status' => Order::STATUS_NEW,
+                'description' => $inputData['description'],
+            ]);
+            
+            $data['order'] = $order;
+            $data['QRCode'] = \Helper::getQRCode($address, $btcAmount);
+            $data['btc_amount'] = $btcAmount;
+            return view('order.qr', $data);
+        } else {
+            return view('error', ['message' => 'Try again later.']);
+        }
     }
 
     /**

@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                         <div class="input-group-addon">₴</div>
-                        {!! Form::text('amount_uah', $order->amount, ['class' => 'form-control']) !!}
+                        {!! Form::text('amount_uah', $order->amount_uah, ['class' => 'form-control']) !!}
                         <div class="input-group-addon">UAH</div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-btc"></i></div>
-                        {!! Form::text('amount_btc', $btc_amount, ['class' => 'form-control']) !!}
+                        {!! Form::text('amount_btc', $order->amount_btc, ['class' => 'form-control']) !!}
                         <div class="input-group-addon">BTC</div>
                     </div>
                 </div>
