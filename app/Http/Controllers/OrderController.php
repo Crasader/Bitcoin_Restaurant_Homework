@@ -106,7 +106,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+
     }
 
     /**
@@ -117,6 +117,13 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->status = Order::STATUS_HISTORY;
+        $order->save();
+        return redirect()->route('orders.index');
+    }
+
+    public function history() {
+        $orders = Order::history()->paginate();
+        return view('order.history', ['orders' => $orders]);
     }
 }

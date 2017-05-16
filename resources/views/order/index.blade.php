@@ -4,10 +4,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td>Status</td>
-                    <td>#</td>
-                    <td>Amount UAH</td>
-                    <td>Paid</td>
+                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Status</td>
+                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">#</td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Amount UAH</td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Paid UAH</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -18,9 +18,9 @@
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         <button type="button" class="{{$order->getStatusClass()}}">{{$order->getStatusName()}}</button>
                     </td>
-                    <td>{{$order->id}}</td>
+                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{$order->id}}</td>
                     <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">{{$order->amount_uah}}</td>
-                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Paid</td>
+                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">0.00</td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         <button type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
@@ -37,7 +37,7 @@
                         @endif
                     </td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        {!! Form::open(['route' => ['orders.update', $order->id], 'method' => 'PATCH']) !!}
+                        {!! Form::open(['route' => ['orders.destroy', $order->id], 'method' => 'DELETE']) !!}
                         <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             Close order
