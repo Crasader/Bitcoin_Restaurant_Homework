@@ -46,9 +46,9 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ route('orders') }}">Orders</a></li>
+                            <li><a href="{{ route('orders.index') }}">Orders</a></li>
+                            <li><a href="{{ route('orders.create') }}">Add order</a></li>
                             <li><a href="{{ route('x-rate') }}">Exchange rate</a></li>
-                            <li><a href="{{ route('add_order') }}">Add order</a></li>
                             <li><a href="{{ route('history') }}">History</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
