@@ -24,17 +24,16 @@ class Order extends Model
         self::STATUS_HISTORY => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        $callback = $this->getApplyFactorClosure();
+        $attributes = $callback($attributes);
+        parent::__construct($attributes);
+    }
+
     public function __call($method, $parameters)
     {
-        $callback = function($parameters) {
-            if (isset($parameters['amount_uah'])) {
-                $parameters['amount_uah'] = round($parameters['amount_uah'],8) * \Config::get('exchange.factor');
-            }
-            if (isset($parameters['amount_btc'])) {
-                $parameters['amount_btc'] = round($parameters['amount_btc'], 8) * \Config::get('exchange.factor');
-            }
-            return $parameters;
-        };
+        $callback = $this->getApplyFactorClosure();
         $parameters = array_map($callback, $parameters);
         return parent::__call($method, $parameters);
     }
@@ -56,11 +55,13 @@ class Order extends Model
         parent::__set($key, $value);
     }
 
-    public function getStatusName() {
+    public function getStatusName()
+    {
         return $this->statuses[$this->status]['name'];
     }
 
-    public function getStatusClass() {
+    public function getStatusClass()
+    {
         return $this->statuses[$this->status]['class'];
     }
 
@@ -72,11 +73,28 @@ class Order extends Model
      */
     public function scopeOpened($query)
     {
-        return $query->where('status', '<',5);
+        return $query->where('status', '<', 5);
     }
 
     public function scopeHistory($query)
     {
         return $query->where('status', 5);
+    }
+
+    /**
+     * @return \Closure
+     */
+    protected function getApplyFactorClosure()
+    {
+        $callback = function ($parameters) {
+            if (isset($parameters['amount_uah'])) {
+                $parameters['amount_uah'] = round($parameters['amount_uah'], 8) * \Config::get('exchange.factor');
+            }
+            if (isset($parameters['amount_btc'])) {
+                $parameters['amount_btc'] = round($parameters['amount_btc'], 8) * \Config::get('exchange.factor');
+            }
+            return $parameters;
+        };
+        return $callback;
     }
 }
