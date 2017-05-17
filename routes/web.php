@@ -26,4 +26,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/orders', 'OrderController');
 Route::get('/rate', 'HomeController@rate')->name('x-rate');
-Route::get('/history', 'HomeController@index')->name('history');
+Route::get('/history', 'OrderController@history')->name('history');
