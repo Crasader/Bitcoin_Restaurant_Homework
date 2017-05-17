@@ -32,6 +32,15 @@ class Order extends BaseModel
         return $this->statuses[$this->status]['class'];
     }
 
+    public function getPaidAmount() {
+        return round(\Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
+    }
+
+    public function getUnpaidAmount() {
+        $amount = round(\Helper::getBTCToUAH($this->amount_btc - $this->transactions->sum('amount_btc')), 2);
+        return $amount > 0 ? $amount : 0;
+    }
+
     /**
      * Scope a query to only include popular users.
      *
