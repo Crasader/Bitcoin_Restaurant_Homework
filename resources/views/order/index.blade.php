@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        {{$orders->links()}}
         <table class="table table-hover">
             <thead>
                 <tr>
