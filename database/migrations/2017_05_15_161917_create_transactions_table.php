@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status');
-            $table->float('amount', 16, 8);
+            $table->bigInteger('amount_btc', false, true);
             $table->string('transaction_number', 64);
             $table->timestamps();
         });
