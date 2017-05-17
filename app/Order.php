@@ -31,13 +31,6 @@ class Order extends Model
         parent::__construct($attributes);
     }
 
-    public function __call($method, $parameters)
-    {
-        $callback = $this->getApplyFactorClosure();
-        $parameters = array_map($callback, $parameters);
-        return parent::__call($method, $parameters);
-    }
-
     public function __get($key)
     {
         $val = parent::__get($key);
