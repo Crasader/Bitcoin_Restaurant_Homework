@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Order extends Model
+class Order extends BaseModel
 {
     const STATUS_NEW = 0;
     const STATUS_UNCONFIRMED_LOWER = 1;
@@ -24,30 +22,6 @@ class Order extends Model
         self::STATUS_HISTORY => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
-    public function __construct(array $attributes = [])
-    {
-        $callback = $this->getApplyFactorClosure();
-        $attributes = $callback($attributes);
-        parent::__construct($attributes);
-    }
-
-    public function __get($key)
-    {
-        $val = parent::__get($key);
-        if (in_array($key, ['amount_uah', 'amount_btc'])) {
-            $val = $val / \Config::get('exchange.factor');
-        }
-        return $val;
-    }
-
-    public function __set($key, $value)
-    {
-        if (in_array($key, ['amount_uah', 'amount_btc'])) {
-            $value = round($value, 8) * \Config::get('exchange.factor');
-        }
-        parent::__set($key, $value);
-    }
-
     public function getStatusName()
     {
         return $this->statuses[$this->status]['name'];
@@ -56,6 +30,15 @@ class Order extends Model
     public function getStatusClass()
     {
         return $this->statuses[$this->status]['class'];
+    }
+
+    public function getPaidAmount() {
+        return round(\Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
+    }
+
+    public function getUnpaidAmount() {
+        $amount = round(\Helper::getBTCToUAH($this->amount_btc - $this->transactions->sum('amount_btc')), 2);
+        return $amount > 0 ? $amount : 0;
     }
 
     /**
@@ -74,20 +57,7 @@ class Order extends Model
         return $query->where('status', 5);
     }
 
-    /**
-     * @return \Closure
-     */
-    protected function getApplyFactorClosure()
-    {
-        $callback = function ($parameters) {
-            if (isset($parameters['amount_uah'])) {
-                $parameters['amount_uah'] = round($parameters['amount_uah'], 8) * \Config::get('exchange.factor');
-            }
-            if (isset($parameters['amount_btc'])) {
-                $parameters['amount_btc'] = round($parameters['amount_btc'], 8) * \Config::get('exchange.factor');
-            }
-            return $parameters;
-        };
-        return $callback;
+    public function transactions() {
+        return $this->hasMany(Transaction::class, 'address', 'address');
     }
 }
