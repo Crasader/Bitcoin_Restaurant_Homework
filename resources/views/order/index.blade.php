@@ -34,7 +34,7 @@
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                     </td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        @if(!in_array($order->status, [\App\Order::STATUS_CONFIRMED_EXACT, \App\Order::STATUS_UNCONFIRMED_EXACT]))
+                        @if(!in_array($order->status, [\App\Order::STATUS_CONFIRMED_OK, \App\Order::STATUS_UNCONFIRMED_OK]))
                         <button type="button" class="{{$order->getStatusClass()}}">
                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                             Repeat

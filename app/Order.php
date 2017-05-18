@@ -5,20 +5,20 @@ namespace App;
 class Order extends BaseModel
 {
     const STATUS_NEW = 0;
-    const STATUS_UNCONFIRMED_LOWER = 1;
-    const STATUS_UNCONFIRMED_EXACT = 2;
-    const STATUS_CONFIRMED_LOWER = 3;
-    const STATUS_CONFIRMED_EXACT = 4;
+    const STATUS_UNCONFIRMED_WRONG = 1;
+    const STATUS_UNCONFIRMED_OK = 2;
+    const STATUS_CONFIRMED_WRONG = 3;
+    const STATUS_CONFIRMED_OK = 4;
     const STATUS_HISTORY = 5;
 
     protected $guarded = [];
 
     protected $statuses = [
         self::STATUS_NEW => ['name' => 'New', 'class' => 'btn btn-primary'],
-        self::STATUS_UNCONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
-        self::STATUS_UNCONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
-        self::STATUS_CONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
-        self::STATUS_CONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
+        self::STATUS_UNCONFIRMED_WRONG => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_UNCONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
+        self::STATUS_CONFIRMED_WRONG => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_CONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
         self::STATUS_HISTORY => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
