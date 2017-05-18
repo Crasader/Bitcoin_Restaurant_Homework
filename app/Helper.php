@@ -40,7 +40,6 @@ class Helper
             || !isset($res['data']['address'])
             || $res['data']['address'] == ''
         ) {
-            return '2MtNtZqQW7acLCnSeM6Eaa6YMJuLRxkdMf2'; //TODO remove it
             return false;
         }
         return $res['data']['address'];
