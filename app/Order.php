@@ -32,12 +32,17 @@ class Order extends BaseModel
         return $this->statuses[$this->status]['class'];
     }
 
-    public function getPaidAmount() {
+    public function getPaidAmountUAH() {
         return round(\Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
     }
 
-    public function getUnpaidAmount() {
+    public function getUnpaidAmountUAH() {
         $amount = round($this->amount_uah - \Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
+        return $amount > 0 ? $amount : 0;
+    }
+
+    public function getUnpaidAmountBTC() {
+        $amount = round($this->amount_btc - $this->transactions->sum('amount_btc'), 8);
         return $amount > 0 ? $amount : 0;
     }
 

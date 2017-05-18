@@ -20,6 +20,28 @@
                         </div>
                     </div>
                 </div>
+                @if($order->status != 0)
+                    <div class="form-group">
+                        {!! Form::label('amount_uah', 'Paid Amount', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="input-group-addon">₴</div>
+                                {!! Form::text('amount_uah', $order->getPaidAmountUAH(), ['class' => 'form-control']) !!}
+                                <div class="input-group-addon">UAH</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('amount_uah', 'Unpaid Amount', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="input-group-addon">₴</div>
+                                {!! Form::text('amount_uah', $order->getUnpaidAmountUAH(), ['class' => 'form-control']) !!}
+                                <div class="input-group-addon">UAH</div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="form-group">
                     {!! Form::label('amount_btc', 'Total Amount', ['class' => 'col-sm-3 control-label']) !!}
                     <div class="col-sm-6">

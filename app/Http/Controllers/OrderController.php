@@ -108,7 +108,7 @@ class OrderController extends Controller
     {
         $data = [
             'order' => $order,
-            'QRCode' => \Helper::getQRCode($order->address, $order->amount_btc, $order->order_number, $order->description),
+            'QRCode' => \Helper::getQRCode($order->address, $order->getUnpaidAmountBTC(), $order->order_number, $order->description),
         ];
         return view('order.edit', $data);
     }
