@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,32 @@ class TransactionController extends Controller
             return hash('sha512', $endpoint);
         }
         if (isset($inputs['type']) && $inputs['type'] == 'btc_deposit') {
-            $inputs['amount_btc'] = $inputs['amount'];
-            unset($inputs['amount']);
-            unset($inputs['tx_expired']);
-            unset($inputs['type']);
-            $transaction = Transaction::create($inputs);
-            return $transaction->order;
+            $data = [
+                'amount_btc' => $inputs['amount'],
+                'address' => $inputs['address'],
+                'transaction' => $inputs['transaction'],
+                'confirmed' => $inputs['confirmed'],
+            ];
+            $transaction = Transaction::create($data);
+            $order = $transaction->order;
+            if($inputs['tx_expired']) {
+
+            } else {
+                if($inputs['confirmed']) {
+                    if($order->isPaid()) {
+                        $order->status = Order::STATUS_CONFIRMED_OK;
+                    } else {
+                        $order->status = Order::STATUS_CONFIRMED_WRONG;
+                    }
+                } else {
+                    if($order->isPaid()) {
+                        $order->status = Order::STATUS_UNCONFIRMED_OK;
+                    } else {
+                        $order->status = Order::STATUS_UNCONFIRMED_WRONG;
+                    }
+                }
+            }
+            $order->save();
         }
         return 1;
     }

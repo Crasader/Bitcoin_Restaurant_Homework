@@ -121,7 +121,13 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $order->status = Order::STATUS_HISTORY;
+        if ($order->status == Order::STATUS_NEW) {
+            $order->status = Order::STATUS_HISTORY_CANCELLED;
+        } else if(in_array($order->status, [Order::STATUS_UNCONFIRMED_WRONG, Order::STATUS_CONFIRMED_WRONG])) {
+            $order->status = Order::STATUS_HISTORY_WRONG;
+        } else if(in_array($order->status, [Order::STATUS_UNCONFIRMED_OK, Order::STATUS_CONFIRMED_OK])) {
+            $order->status = Order::STATUS_HISTORY_OK;
+        }
         $order->save();
         return redirect()->route('orders.index');
     }
