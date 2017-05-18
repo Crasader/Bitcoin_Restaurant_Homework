@@ -17,10 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/webhooks', function(Request $request) {
-    $endpoint = $request->url();
-    $inputs = json_decode(file_get_contents('php://input'), true);
-    if ( isset( $inputs['type'] ) && $inputs['type'] == 'verify' ) {
-        return hash ('sha512', $endpoint);
-    }
-});
+Route::post('/webhooks', 'TransactionController@webhook');

@@ -9,7 +9,9 @@ class Order extends BaseModel
     const STATUS_UNCONFIRMED_OK = 2;
     const STATUS_CONFIRMED_WRONG = 3;
     const STATUS_CONFIRMED_OK = 4;
-    const STATUS_HISTORY = 5;
+    const STATUS_HISTORY_CANCELLED = 5;
+    const STATUS_HISTORY_WRONG = 6;
+    const STATUS_HISTORY_OK = 7;
 
     protected $guarded = [];
 
@@ -19,7 +21,9 @@ class Order extends BaseModel
         self::STATUS_UNCONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
         self::STATUS_CONFIRMED_WRONG => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
         self::STATUS_CONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
-        self::STATUS_HISTORY => ['name' => 'Archived', 'class' => 'btn btn-success'],
+        self::STATUS_HISTORY_CANCELLED => ['name' => 'Archived', 'class' => 'btn btn-success'],
+        self::STATUS_HISTORY_WRONG => ['name' => 'Archived', 'class' => 'btn btn-success'],
+        self::STATUS_HISTORY_OK => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
     public function getStatusName()
@@ -44,6 +48,10 @@ class Order extends BaseModel
     public function getUnpaidAmountBTC() {
         $amount = round($this->amount_btc - $this->transactions->sum('amount_btc'), 8);
         return $amount > 0 ? $amount : 0;
+    }
+
+    public function isPaid() {
+        return $this->transactions->sum('amount_btc') >= $this->amount_btc;
     }
 
     /**
