@@ -15,9 +15,9 @@
             </tr><tr>
                 <td>Description</td><td>{{$order->description}}</td>
             </tr><tr>
-                <td>Paid UAH</td><td>{{$order->getPaidAmount()}}</td>
+                <td>Paid UAH</td><td>{{$order->getPaidAmountUAH()}}</td>
             </tr><tr>
-                <td>Unpaid UAH</td><td>{{$order->getUnpaidAmount()}}</td>
+                <td>Unpaid UAH</td><td>{{$order->getUnpaidAmountUAH()}}</td>
             </tr><tr>
                 <td>Created</td><td>{{$order->created_at}}</td>
             </tr><tr>

@@ -94,7 +94,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('order.edit');
+        return view('order.edit', ['order' => $order]);
     }
 
     /**
@@ -106,7 +106,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-
+        $data = [
+            'order' => $order,
+            'QRCode' => \Helper::getQRCode($order->address, $order->getUnpaidAmountBTC(), $order->order_number, $order->description),
+        ];
+        return view('order.edit', $data);
     }
 
     /**

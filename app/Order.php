@@ -5,20 +5,20 @@ namespace App;
 class Order extends BaseModel
 {
     const STATUS_NEW = 0;
-    const STATUS_UNCONFIRMED_LOWER = 1;
-    const STATUS_UNCONFIRMED_EXACT = 2;
-    const STATUS_CONFIRMED_LOWER = 3;
-    const STATUS_CONFIRMED_EXACT = 4;
+    const STATUS_UNCONFIRMED_WRONG = 1;
+    const STATUS_UNCONFIRMED_OK = 2;
+    const STATUS_CONFIRMED_WRONG = 3;
+    const STATUS_CONFIRMED_OK = 4;
     const STATUS_HISTORY = 5;
 
     protected $guarded = [];
 
     protected $statuses = [
         self::STATUS_NEW => ['name' => 'New', 'class' => 'btn btn-primary'],
-        self::STATUS_UNCONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
-        self::STATUS_UNCONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
-        self::STATUS_CONFIRMED_LOWER => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
-        self::STATUS_CONFIRMED_EXACT => ['name' => 'Paid', 'class' => 'btn btn-success'],
+        self::STATUS_UNCONFIRMED_WRONG => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_UNCONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
+        self::STATUS_CONFIRMED_WRONG => ['name' => 'Not fully paid', 'class' => 'btn btn-warning'],
+        self::STATUS_CONFIRMED_OK => ['name' => 'Paid', 'class' => 'btn btn-success'],
         self::STATUS_HISTORY => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
@@ -32,12 +32,17 @@ class Order extends BaseModel
         return $this->statuses[$this->status]['class'];
     }
 
-    public function getPaidAmount() {
+    public function getPaidAmountUAH() {
         return round(\Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
     }
 
-    public function getUnpaidAmount() {
-        $amount = round(\Helper::getBTCToUAH($this->amount_btc - $this->transactions->sum('amount_btc')), 2);
+    public function getUnpaidAmountUAH() {
+        $amount = round($this->amount_uah - \Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
+        return $amount > 0 ? $amount : 0;
+    }
+
+    public function getUnpaidAmountBTC() {
+        $amount = round($this->amount_btc - $this->transactions->sum('amount_btc'), 8);
         return $amount > 0 ? $amount : 0;
     }
 
