@@ -35,18 +35,20 @@
                     </td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         @if(!in_array($order->status, [\App\Order::STATUS_CONFIRMED_OK, \App\Order::STATUS_UNCONFIRMED_OK]))
-                        <button type="button" class="{{$order->getStatusClass()}}">
-                            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-                            Repeat
-                        </button>
+                        {!! Form::open(['route' => ['orders.update', $order->id], 'method' => 'PATCH']) !!}
+                            <button type="submit" class="{{$order->getStatusClass()}}">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                Repeat
+                            </button>
+                        {!! Form::close() !!}
                         @endif
                     </td>
                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         {!! Form::open(['route' => ['orders.destroy', $order->id], 'method' => 'DELETE']) !!}
-                        <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            Close order
-                        </button>
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                Close order
+                            </button>
                         {!! Form::close() !!}
                     </td>
                 </tr>
