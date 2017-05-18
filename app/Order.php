@@ -37,7 +37,7 @@ class Order extends BaseModel
     }
 
     public function getUnpaidAmount() {
-        $amount = round(\Helper::getBTCToUAH($this->amount_btc - $this->transactions->sum('amount_btc')), 2);
+        $amount = round($this->amount_uah - \Helper::getBTCToUAH($this->transactions->sum('amount_btc')), 2);
         return $amount > 0 ? $amount : 0;
     }
 
