@@ -1,50 +1,411 @@
-//Unique ID
-KTRwHn
-//-----BEGIN PRIVATE KEY-----
-MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDeAakFge7hdKAM
-DuXd4w0tPnUmNosB1CgFNVuvkJ4FMr+3pPekUtKZ2hXGTxa+QPw80VSfLiHk9IkD
-aIW/3/p5eUUw5sBnlt7J6unKyVcHnkM8R2HVr1Yqa8ElGe5pfiXZBLDMJLw5ug5E
-QPSv1+hRBYNQX376RzOfBsWEee4YkjCC6ptuWv9LCZht3oMeuk+HvRgpZQn093kZ
-GswAofOE8ykZepsiLatOqgf3As3ddaUFj5eUx8NJIVWvbOw2OSoOz0qMRJWHtnXI
-YN3inm7rit9p/SiiP3E4/XLrjoExq8i2vf4BBRgoNpkrGqoi/jJTqrTb/3uZDpWe
-N0Eei/6jAgMBAAECggEBANATvEiGNNApUAydNgNW2LXMMV7EhlsLbwsarLmLkSAM
-JbbJLrZcTjmXNwtse0OMgx25kVe0lF4UeAqyv5FMK2YJLLmdvT4aIOwdekzvktt4
-EUqBGQh/0wHlhtzwRg2oB281P0PHNofgg5ijTPM3KO4vfZkqOEf5zj9ByITXBzsM
-ovL4vnHasc/UrMEQsyv4Y/pTqk0OlzC6aDG8N6E0S+iiPvSQEBATchV/3rwHb67b
-XUUZCPgCRD3pYTKLwpFpY7y96OXYwzlrUIag3d85bJnTj+PG/WwmQhJQhmzj59W8
-pTFnmJn8F40wgp0bo9TqfwpPKnucxOOgxq0EKU2YcmkCgYEA8RLwAe8eqza/fzjl
-s94LCKUF7VTTPpwFbkYaC5GnkWCbjG70Z7mTQkxrIljtmPqSZ3TRjf3dmMXw7qkk
-w/1w42ugG6OwU6PhbeUvEzy6KufMzb5VxV21T/bbGfva1do5QEnXVHGPH+gJ8ad1
-TKdcmL68ebKxeE1a51Hp4sT0sm0CgYEA68B/9aeOsy8BpjAxoGroyGbYVuaNs1xw
-jowmjRLI93dZb1oHjPWEzvRov3NFjHs/6Z9FBSeoS3Yf/VlbQuTu0FqVsF263/YN
-D7bxzqYLbQxwknaKmLjMZ0xNA1jXwRcN/wRCewaZeeXYAm8RrNmZQaPojBgzEzXf
-eT6KjH/vS08CgYEAx+48vl3hwX0WNByr5BAydmjmEX5X84TRvDLHRvD1V8wXNNCQ
-QbXWOxXFhCbcZhLpeIOZh3kTXrBKsKP2qdR22yVXE5Udl0BCpTF9aSbj/tFfOQKx
-f43H4RmJfHMzekgRUw/qVU4YtQ1rsc5/qaLjWIpXJVbdeDgvO8jjf/54McECgYAx
-jUmYCbr9wKCZHMIhlLcPAEbypQ0dqQ1jeOPVfSBOm4Bp3kN+BlD+6vJlY0Y4C+PY
-KAjq13YRPmfk6XY8LkBf/No/ssPHtUDzj6FtrQrzxcyXjGD/TsBv6eK6FF9tD3p6
-opuSnkV+EKiBgnT1ntsOp/QGFkQOAqHRKysV8wIKEwKBgQDBSJBuyFjkqytE83+w
-Ygonps2INgEeiW69E746Zej7PDxok7g3oPzFnXNTY/QN5AGaPkj0cNVKhkwOrP6/
-7Q+zeXLTtQ1t5eWWQa4mX1eM2Fm1mLNKAY0wJKTixGjQpktxmCjOaALHBVfguMYU
-sPq2c3Wq/a4qQmydktM6Z4/BEg==
------END PRIVATE KEY-----
+Задание включает в себя основные аспекты работы, с которыми сталкиваются участники нашей команды.
+Это никоим образом не попытка нашару получить готовый продукт - задание писалось методом упрощения уже готового проекта.
+В процессе написания Вам нужно будет взаимодействовать в двухстороннем режиме с нашим сервером.
+Для этого от нас - ключи доступа к АПИ.
+От Вас - URL, по которому наш сервер будет отправлять несинхронные данные(webhook).
 
-//-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3gGpBYHu4XSgDA7l3eMN
-LT51JjaLAdQoBTVbr5CeBTK/t6T3pFLSmdoVxk8WvkD8PNFUny4h5PSJA2iFv9/6
-eXlFMObAZ5beyerpyslXB55DPEdh1a9WKmvBJRnuaX4l2QSwzCS8OboORED0r9fo
-UQWDUF9++kcznwbFhHnuGJIwguqbblr/SwmYbd6DHrpPh70YKWUJ9Pd5GRrMAKHz
-hPMpGXqbIi2rTqoH9wLN3XWlBY+XlMfDSSFVr2zsNjkqDs9KjESVh7Z1yGDd4p5u
-64rfaf0ooj9xOP1y646BMavItr3+AQUYKDaZKxqqIv4yU6q02/97mQ6VnjdBHov+
-owIDAQAB
------END PUBLIC KEY-----
-//Server pub key
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwT+SN3/aCAwyjsAt+Omu
-9pvLZ9tnMqK0NHq99BgODSR8H+Gt6ZmqiTLCWn4EXyF0Bfjqf0lYTA03D3N1Bs2e
-Pv+OvmNIpP9iF53zweArCgEvwIjotGDbFnrKi6zmeu7jt81D8K6X/g3uEsBhdb8/
-MpulVjUhi0w5JZPUsn4IAI1xLqCVF1EV1Z6bldV4E4LieJrE80+Q0IS5W0YMxQNI
-zZscoVa0jSERXVFQzR+KVVGfw+jD5I+lHmsFgQHS4BVEAFg1rHnFPG8RksYH/y9B
-ENGQFzvl7Gc8posBVI8Y/PP0tM8n+d1HyoKwpx4Ohq0YA7qh5ru7DrjbqgHzoRtJ
-9QIDAQAB
------END PUBLIC KEY-----
+
+
+Общее описание алгоритма работы
+Интерфейс - описание страниц
+I. Статусы платежей
+II. Общий режим работы
+III. Курс
+IV. Алгоритм изменения статусов
+V. Пример использования FstxApi.php
+VI. Webhooks
+VII. Тестирование оплаты
+VIII. Требования к разработке
+
+
+
+
+
+Demo version of restaurant BTC payment
+
+Short algo:
+1. Client(C) wants to pay in BTC.
+2. Restaurant Worker(RW):
+ - opens site;
+ - adds new payment;
+ - enters sum.
+3. Restaurant Server(RS) requests address from FstxServer(FS).
+4. (FS) returns data to (RS).
+5. (RS) recalculates every sum from UAH to BTC, forms link and QR-code, displays them to (RW).
+6. (RW) provides (C) with returned QR-code and/or link.
+7. (C) uses info for paying. Transaction is broadcasted.
+8. When transaction becomes known to (FS), it notifies (RS) via webhook.
+9. (RS) notifies (RW), that payment had been sent.
+10. (C) is free to go.
+
+
+Интерфейсы
+
+(возможный вариант внешнего вида приведён на скриншотах в папке screenshots данного репозитория)
+
+1 страница:
+меню(на каждой странице)
+* список активных заказов(дефолтная страница)
+* история заказов
+* создать заказ
+* курс
+
+список активных заказов(таблица с поиском(фильтрацией) по номеру или описанию заказа + постраничный вывод)
+иконка-цвет статуса заказа | текстовый статус заказа | номер заказа | сумма заказа, грн | оплачено, грн | остаток, грн | описание заказа | кнопки "детали(синяя)","доплатить(оранжевая)","повторить(чёрная)","закрыть заказ(красная)"
+
+* кнопка "детали" отображается для всех, ведёт на детали платежа (см "3 страница")
+* кнопка "доплатить" появляется только для статусов 1 и 3(см. I), отображает ссылку и QR для остатка суммы(см. "6 страница")
+* кнопка "повторить" появляется только для статуса 0(см. I), отображает ссылку и QR для суммы заказа(см. "6 страница")
+* кнопка "закрыть заказ" отображается для всех, выполняет действие переноса платежа в историю со статусом по алгоритму смены статусом(см. IV)
+* нажатие на кнопку "закрыть заказ" должно вызвать окно подтверждения
+* иконка-цвет статуса заказа | текстовый статус заказа -> можно сделать совместно - плашками в стиле bootstrap соответсвенного цвета с белым(или рекомендуемым по контрастности) цветом текста
+
+
+2 страница:
+история заказов
+структура та же, что и для активных заказов, только с одной кнопкой "детали"
+
+3 страница:
+детали заказа
+ номер
+ сумма, грн
+ сумма, btc
+ адрес bitcoin
+ описание
+ оплачено, грн
+ остаток, грн
+ дата создания
+ дата изменения
+
++ список входящих транзакций сети биткоин:
+дата                    | сумма, грн | прошла/статус(confirmed|unconfirmed) | txid
+<-YYYY-MM-DD HH:mm:ss       xxxx.xx->          ->+/-<-                       <- text
+
+<- выравнивание влево
+-> выравнивание вправо
+-> <- по центру
+xx.xx - формат вывода числа
+
+4 страница:
+новый заказ
+форма ввода
+	- номер заказа(внутренний номер заказа организации, может быть численно-буквенный, по умолчанию предлагать следующий порядковый номер в системе)
+	- сумма заказа, в грн(number, positive)
+	- описание заказа(текст, необязательное, лимит 200 символов)
+	- Создать
+после создания сразу же на экран выводить его QR и ссылку(см. п.6)
+
+5 страница:
+курс
+(чтоб клиенту можно было показать вне контекста другой информации, сделаем отдельную страницу с большим значением)
+1 btc = 32 345.02 грн
+
+6 страница, может быть pop-up окном:
+Информация об оплате
+	- номер заказа
+	- сумма заказа, грн
+	- оплачено, грн(только для "доплатить")
+	- остаток, грн(только для "доплатить")
+	- сумма, btc
+	- адрес bitcoin
+	- QR-code с зашифрованной ссылкой
+* линк на оплату формируется таким образом:
+  {protocol}:{bitcoin address}?amount={btc_sum_in_BTC}&label={label}&message={message}
+  bitcoin:17o6vR1ysyCzaPTzVwqe1ZdFqbgjEC3SmP?amount=0.01253450&label=RestNewHemp&message=TABLE%20X
+  {btc_sum_in_BTC} - сумма оплаты(доплаты) в BTC
+  {label} - будет характеризировать заведение(типа "McDonalds")
+  {message} - описание платежа. Здесь всегда будет префикс Order#{xxx} - {xxx} = номера заказа, а также ручное описание, если его ввели на форме добавления заказа)
+  переменные эти вынести в конфиг.
+  ссылка должна быть url_encoded
+QR отображать максимально большим, учитывая вероятность показа на мобильном телефоне.
+
+
+Общие требования:
+* все суммы грн в формате
+{any digits}.xx с выравниванием по правому краю.
+* все суммы BTC в формате
+{any digits}.xxxxxxxx с выравниванием по правому краю.
+
+
+
+I. Статусы платежей
+У платежа может быть несколько состояний в зависимости от статуса транзакции:
+	цвет		текст на интерфейсе	описание
+0 - (черный)	"нет"				unknown
+1 - (оранжевый)	"недоплата"			unconfirmed lower sum // unconfirmed = just seen on net, fresh. Status is defined in data, received via webhook
+2 - (зелёный)	"оплачен"			unconfirmed exact(greater) sum
+3 - (оранжевый)	"недоплата"			confirmed lower sum
+4 - (зелёный)	"оплачен"			confirmed exact(greater) sum
+
+На статусах 2 и 4 клиента можно отпускать
+На статусе 1 и 3 должна быть возможность взять с него доплату в btc (не создавая новый ордер и не используя другой адрес, показать клиенту ссылку/QR код для оплаты на недостающую сумму, см. "страница 6")
+
+
+II. Общий режим работы
+Т.к. проект - демо, и нагрузка не ожидается, все запросы(на курс, на получение адреса и т.п.) делаются в режиме реального времени.
+
+III. Курс
+При оплате BTC в эквиваленте гривны происходит двойная конвертация
+btc->usd->uah
+
+Данные по курсу приходят парой(bid-ask, sell-buy), в нашем алгоритме мы всегда используем меньшее значение(bid и buy).
+При этом на каждом этапе применяем fee к курсу(соответственно, вычитая его из изначального значения).
+Параметры fee указываются в конфиге в долях(1%=0.01).
+Fee сделать индивидуальным на каждую пару курсов btc_usd и usd_uah.
+
+например
+1 btc = (1000/1010) usd //(bid/ask)
+1 usd = (30/33) uah     //(buy/sell)
+
+btc_usd = 1000;
+usd_uah = 30;
+
+btc_usd_fee = 0.01;//1%
+usd_uah_fee = 0.02;//2%
+
+для клиента курс будет такой
+
+client_btc_usd = btc_usd*(1-btc_usd_fee) = 1000*(1-0.01) = 990;//(1-fee) это интерпретация процентов в долях, чтоб избежать умножений и делений на 100
+client_usd_uah = 30*(1-0.02) = 29.4;
+client_btc_uah = client_btc_usd * client_usd_uah = 990 * 29.4 = 29106;// uah for 1 btc
+
+
+сумму долга клиента всегда округляем в большую сторону
+сумму оплаты клиента всегда округляем в меньшую сторону
+точность округления - FACTOR=100000000 = 8 знаков после запятой
+Для отображения ссылок оплаты используется размерность BTC, т.е. то, что получили выше.
+Для хранения в БД используем satoshi(BTC*100000000) - максимальную точность(храним в bigint), т.е. без деления на FACTOR(=1717859).
+Таким же образом(точность 8 знаков) храним значения для всех валюты.
+Арифметические действия по возможности совершаем в INT диапазоне(*FACTOR с форм ввода или в чистом виде после извлечения из БД), преобразовывая в float человеческого вида(/FACTOR) только для отображения.
+
+
+sum_uah = 500;//грн в чеке - сумма долга клиента
+sum_btc = sum_uah / client_btc_uah = 500/29106 = 0.01717858860716003573146430289287
+
+ceil(0.01717858860716003573146430289287*FACTOR) = 1717859 => записываем в БД
+ceil(0.01717858860716003573146430289287*FACTOR)/FACTOR = ceil(1717858.860716003573146430289287)/100000000 = 0.01717859 btc => отображаем на страницах
+
+
+сумма оплаты клиента:
+получили уведомление на входящие 0.017342 btc
+
+floor(0.017342*FACTOR) = 1734200 => записываем в БД как входящие BTC
+floor(0.017342*FACTOR*client_btc_uah) = 50475625200 => записываем в БД как сумма входящих грн
+floor(0.017342*FACTOR*client_btc_uah/FACTOR*100)/100 = 504.75 => отображаем на странице
+
+перед записью в БД значения bigint на всякий случай прогоняем через round() - может спасти от некоторых головных болей.
+также на 32-битных операционных системах есть шанс нерабочести PHP с числами такого диапазона, но всегда есть gmp и bcmath
+
+
+курс на btc берём из FstxServer по клиентскому АПИ(FstxAPI.php, см. V)
+курс на usd берём из привата(https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11)
+
+
+
+IV. Алгоритм изменения статусов
+
+    NEW
+    	-> ручная отмена
+    		-> HISTORY_CANCELLED
+    	-> приходит unconfirmed уведомление о транзакции
+    		-> денег достаточно
+    			-> UNCONFIRMED_OK
+    		-> денег недостаточно
+    			-> UNCONFIRMED_WRONG
+    	-> приходит confirmed уведомление о транзакции
+    		-> денег достаточно
+    			-> CONFIRMED_OK
+    		-> денег недостаточно
+    			-> CONFIRMED_WRONG
+
+
+    UNCONFIRMED_OK
+    	-> приходит confirmed уведомление о транзакции
+    		-> CONFIRMED_OK
+    	-> кассир жмёт "отпустить клиента"
+    		-> HISTORY_OK
+    	-> приходит transaction_expired уведомление о транзакции(удаляем транзакцию)
+    		-> у заказа больше нет транзакций
+    			-> NEW
+    		-> у заказа есть ещё транзакции
+    			-> сумма транзакций >= сумме заказа
+    				-> UNCONFIRMED_OK
+    			-> сумма транзакций < суммы заказа
+    				-> все транзакции подтверждены
+    					-> CONFIRMED_WRONG
+    				-> не все транзакции подтверждены
+    					-> UNCONFIRMED_WRONG
+
+
+    CONFIRMED_OK
+    	-> кассир жмёт "отпустить клиента"
+    		-> HISTORY_OK
+
+
+    UNCONFIRMED_WRONG
+    	-> приходит unconfirmed уведомление о новой транзакции
+    		-> денег в сумме по всем транзакциям достаточно
+    			-> UNCONFIRMED_OK
+    		-> денег в сумме по всем транзакциям недостаточно
+    			-> UNCONFIRMED_WRONG
+    	-> приходит confirmed уведомление о транзакции
+    		-> денег в сумме по всем транзакциям достаточно
+    			-> все транзакции confirmed
+    				-> CONFIRMED_OK
+    			-> не все транзакции confirmed
+    				-> UNCONFIRMED_OK
+    		-> денег в сумме по всем транзакциям недостаточно
+    			-> все транзакции confirmed
+    				-> CONFIRMED_WRONG
+    			-> не все транзакции confirmed
+    				-> UNCONFIRMED_WRONG
+    	-> кассир жмёт "отменить"
+    		-> HISTORY_WRONG
+    	-> приходит transaction_expired уведомление о транзакции(удаляем транзакцию)
+    		-> у заказа больше нет транзакций
+    			-> NEW
+    		-> у заказа есть ещё транзакции
+				-> все транзакции подтверждены
+					-> CONFIRMED_WRONG
+				-> не все транзакции подтверждены
+					-> UNCONFIRMED_WRONG
+
+
+    CONFIRMED_WRONG
+    	-> приходит unconfirmed уведомление о новой транзакции
+    		-> денег в сумме по всем транзакциям достаточно
+    			-> UNCONFIRMED_OK
+    		-> денег в сумме по всем транзакциям недостаточно
+    			-> UNCONFIRMED_WRONG
+    	-> приходит confirmed уведомление о транзакции
+    		-> денег в сумме по всем транзакциям достаточно
+    			-> все транзакции confirmed
+    				-> CONFIRMED_OK
+    			-> не все транзакции confirmed
+    				-> UNCONFIRMED_OK
+    		-> денег в сумме по всем транзакциям недостаточно
+    			-> все транзакции confirmed
+    				-> CONFIRMED_WRONG
+    			-> не все транзакции confirmed
+    				-> UNCONFIRMED_WRONG
+    	-> кассир жмёт "отменить"
+    		-> HISTORY_WRONG
+
+
+    HISTORY_*
+    	-> статус не меняется, даже если деньги дошли потом
+
+
+V. Пример использования FstxApi.php
+
+Настройки
+	server = https://dev.client.fstx.ddev.pw
+	my_private_key	= (будет выдан при получении задания)
+	my_unique_id	= (будет выдан при получении задания)
+	server_public_key	= (будет выдан при получении задания)
+	
+Инициализация
+	$FstxApi = new FstxApi(Config::get('fapi.server').'/api/v1/', OPENSSL_ALGO_SHA512, null);
+	$FstxApi->set_privkey(Config::get('fapi.my_private_key'));
+	$FstxApi->set_uid(Config::get('fapi.my_unique_id'));
+	$FstxApi->set_serverpubkey(Config::get('fapi.server_public_key'));
+
+Использование
+	Получение курса
+		$res = $FstxApi->query_public('rate');
+		if (isset($res['code']) && $res['code'] == 0)
+		{
+			$arr_rates['btc_usd'] = round(floor($res['data']['bid']));
+		}
+		else
+		{
+			return false;
+		}
+
+	Получение адреса
+		$res = $FstxApi->query_private('address/get/new', ['is_autoexchange' => 1]);
+		if (
+			!isset($res['code'])
+			|| $res['code'] != 0
+			|| !isset($res['data']['address'])
+			|| $res['data']['address'] == ''
+		)
+		{
+			return false;
+		}
+		return $res['data']['address'];
+
+VI. Webhooks
+
+Т.к. события не синхронные, данные об изменениях в статусов платежей приходят с сервера FstxServer посредством обращения на рабочий сервер.
+Для этого нужно настроить рабочий сервер для приёма таких уведомлений на определённый адрес. Можно ограничить доступ к нему по IP 46.4.113.124, с которого будут приходить уведомления.
+
+Данные на вебхук приходят в JSON формате таком виде:
+{
+	"address":"2MsKsFzXZMguXtumuo23phQbdEeHypVygqQ",
+	"amount":2500000,
+	"confirmed":true,
+	"transaction":"ca6ef1411aca267deba6c9cb27fbc4325b015637e9944a194be0f019f200c2e7",
+	"tx_expired":false,
+	"type":"btc_deposit"
+}
+
+Ответ на вебхук в случае успешной операции = 1 в теле ответа(echo 1).
+В случае не успеха(необходимости повторения вебхука) - любой другой ответ.
+
+Нас интересуют два вида(type)
+verify		- для подтверждения работоспособности вебхука
+btc_deposit	- основной для работы
+
+все остальные типы игнорируем, отправляя ответ "1"
+
+
+
+type = verify
+	в ответ на данный заврос нужно вернуть sha512 хэш исходной ссылки, указанной для вебхука, т.е.
+	URL: http://my-home-test.server.dyndns.org/webhooks
+	ответ: ce7a5fbdebe4d82143cc834623983566f2e301afbf768be7c4456b0e0123c1445e4072e17a0a68ab78f9cd4c2c2c1ee483f474287b63ca02d199b37935b0b8fb
+пример кода:
+<?php
+$inputs = json_decode(file_get_contents('php://input'), true);
+if ( isset( $inputs['type'] ) && $inputs['type'] == 'verify' )
+{
+	echo hash ('sha512', $endpoint);
+	return;
+}
+// your custom logic
+?>
+
+VII. Тестирование оплаты
+
+Для проверки полного цикла необходимо иметь механизм доступа к сети bitcoin.
+В тестовом задании используются бесплатные тестовые монеты btc.
+Для их получения можно использовать ряд сайтов-доноров:
+(http://tpfaucet.appspot.com/
+https://testnet.manu.backend.hamburg/faucet
+google:TestNet Faucet)
+Можно использовать их для накопления монет на кошельках
+(чтоб не заморачиваться с установкой и настройкой программ, удобно использовать сайты, аналогичные http://testnetwallet.com/
+google: bitcoin testnet online wallet)
+Такой вариант даёт гибкость использования точных сумм к отправке.
+Но можно оформлять платежи напрямую с сайта-донора на адреса, полученные с FstxServer'а.
+Если возникают проблемы с данным пунктом, обращайтесь, поможем.
+
+
+VIII. Требования по разработке
+
+На данный момент сервер, на котором будет осуществляться проверка тестового задания, использует
+ PHP 5.6.17
+ MySQL 5.5.44
+ Nginx 1.6.2
+Желательно, чтоб мы смогли проверить Ваше задание без дополнительных танцев с бубнами.
+
+Чтоб оценить уровень знакомства с git и техникой gitflow, ожидается, что каждая логически и функционально ограниченная часть проекта будет реализована в отдельной feature с последующим merge в ветку develop. При этом коммиты должны сопровождаться коротким описанием выполненной в них работы и заливаться на сервер сразу же после создания. При этом желательно не делать один коммит на всю feature, а создавать их по мере выполнения задачи.
+
+При настройке Laravel желательно оставлять только используемые модули.
+
+Общая инструкция по запуску проекта приветствуется(от записок для админа до шагов по регистрации).
+Если требуется специфическая настройка, инструкции и конфигурация с пояснениями должны прилагаться к проекту дополнительно(например, Apache:rewrite_mod или Laravel:.env).
+
+Все дополнительные материалы должны храниться в репозитории в отдельной папке/файле.
+
