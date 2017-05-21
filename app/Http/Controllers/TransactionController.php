@@ -30,11 +30,29 @@ class TransactionController extends Controller
                 Order::STATUS_HISTORY_CANCELLED,
                 Order::STATUS_HISTORY_WRONG,
                 Order::STATUS_HISTORY_OK,
-            ])) {
+            ])
+            ) {
                 if ($inputs['tx_expired']) {
-                    
+                    $transaction->delete();
+                    if (!$order->transactions->count()) {
+                        $order->status = Order::STATUS_NEW;
+                    } else {
+                        if ($order->isConfirmed()) {
+                            if ($order->isPaid()) {
+                                $order->status = Order::STATUS_CONFIRMED_OK;
+                            } else {
+                                $order->status = Order::STATUS_CONFIRMED_WRONG;
+                            }
+                        } else {
+                            if ($order->isPaid()) {
+                                $order->status = Order::STATUS_UNCONFIRMED_OK;
+                            } else {
+                                $order->status = Order::STATUS_UNCONFIRMED_WRONG;
+                            }
+                        }
+                    }
                 } else {
-                    if ($inputs['confirmed']) {
+                    if ($inputs['confirmed'] && $order->isConfirmed()) {
                         if ($order->isPaid()) {
                             $order->status = Order::STATUS_CONFIRMED_OK;
                         } else {

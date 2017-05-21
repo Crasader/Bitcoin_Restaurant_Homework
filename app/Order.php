@@ -26,6 +26,30 @@ class Order extends BaseModel
         self::STATUS_HISTORY_OK => ['name' => 'Archived', 'class' => 'btn btn-success'],
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        $callback = $this->getApplyFactorClosure();
+        $attributes = $callback($attributes);
+        parent::__construct($attributes);
+    }
+
+    /**
+     * @return \Closure
+     */
+    protected function getApplyFactorClosure()
+    {
+        $callback = function ($parameters) {
+            if (isset($parameters['amount_uah'])) {
+                $parameters['amount_uah'] = round($parameters['amount_uah'], 8) * \Config::get('exchange.factor');
+            }
+            if (isset($parameters['amount_btc'])) {
+                $parameters['amount_btc'] = round($parameters['amount_btc'], 8) * \Config::get('exchange.factor');
+            }
+            return $parameters;
+        };
+        return $callback;
+    }
+
     public function getStatusName()
     {
         return $this->statuses[$this->status]['name'];
@@ -52,6 +76,10 @@ class Order extends BaseModel
 
     public function isPaid() {
         return $this->transactions->sum('amount_btc') >= $this->amount_btc;
+    }
+
+    public function isConfirmed() {
+        return !$this->transactions->where('confirmed', 0)->count();
     }
 
     /**
