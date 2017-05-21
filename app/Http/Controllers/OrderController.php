@@ -45,7 +45,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'order_number' => 'required|alpha_num',
+            'order_number' => 'required|alpha_num|unique:orders,order_number',
             'amount' => 'required|numeric',
             'description' => 'max:200',
         ]);

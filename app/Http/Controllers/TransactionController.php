@@ -12,9 +12,11 @@ class TransactionController extends Controller
     {
         $endpoint = $request->url();
         $inputs = json_decode(file_get_contents('php://input'), true);
+
         if (isset($inputs['type']) && $inputs['type'] == 'verify') {
             return hash('sha512', $endpoint);
         }
+
         if (isset($inputs['type']) && $inputs['type'] == 'btc_deposit') {
             $data = [
                 'amount_btc' => $inputs['amount'],
@@ -24,24 +26,48 @@ class TransactionController extends Controller
             ];
             $transaction = Transaction::create($data);
             $order = $transaction->order;
-            if($inputs['tx_expired']) {
-
-            } else {
-                if($inputs['confirmed']) {
-                    if($order->isPaid()) {
-                        $order->status = Order::STATUS_CONFIRMED_OK;
+            if (!in_array($order->status, [
+                Order::STATUS_HISTORY_CANCELLED,
+                Order::STATUS_HISTORY_WRONG,
+                Order::STATUS_HISTORY_OK,
+            ])
+            ) {
+                if ($inputs['tx_expired']) {
+                    $transaction->delete();
+                    if (!$order->transactions->count()) {
+                        $order->status = Order::STATUS_NEW;
                     } else {
-                        $order->status = Order::STATUS_CONFIRMED_WRONG;
+                        if ($order->isConfirmed()) {
+                            if ($order->isPaid()) {
+                                $order->status = Order::STATUS_CONFIRMED_OK;
+                            } else {
+                                $order->status = Order::STATUS_CONFIRMED_WRONG;
+                            }
+                        } else {
+                            if ($order->isPaid()) {
+                                $order->status = Order::STATUS_UNCONFIRMED_OK;
+                            } else {
+                                $order->status = Order::STATUS_UNCONFIRMED_WRONG;
+                            }
+                        }
                     }
                 } else {
-                    if($order->isPaid()) {
-                        $order->status = Order::STATUS_UNCONFIRMED_OK;
+                    if ($inputs['confirmed'] && $order->isConfirmed()) {
+                        if ($order->isPaid()) {
+                            $order->status = Order::STATUS_CONFIRMED_OK;
+                        } else {
+                            $order->status = Order::STATUS_CONFIRMED_WRONG;
+                        }
                     } else {
-                        $order->status = Order::STATUS_UNCONFIRMED_WRONG;
+                        if ($order->isPaid()) {
+                            $order->status = Order::STATUS_UNCONFIRMED_OK;
+                        } else {
+                            $order->status = Order::STATUS_UNCONFIRMED_WRONG;
+                        }
                     }
                 }
+                $order->save();
             }
-            $order->save();
         }
         return 1;
     }
